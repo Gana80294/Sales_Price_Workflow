@@ -5,12 +5,14 @@
  */
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import {  NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { NgxSpinnerModule } from "ngx-spinner";
+
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -20,6 +22,8 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CustomInterceptor } from './pages/Interceptors/custom.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +32,7 @@ import {
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    NgxSpinnerModule ,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
@@ -39,8 +44,10 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    MatSnackBarModule,
   ],
   bootstrap: [AppComponent],
+  providers: [{provide : HTTP_INTERCEPTORS, useClass : CustomInterceptor, multi : true}],
 })
 export class AppModule {
 }

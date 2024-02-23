@@ -1,0 +1,97 @@
+<!-- 
+<div class="container-fluid login">
+    <div class="row">
+        <div class="col-md-7 image d-flex d-none d-md-block p-0">
+        </div>
+         <div class="col-md-5">
+           
+            <div class="d-flex row mt-3">
+                <form [formGroup]="loginFormGroup">
+                  <span class="Title mt-5 d-flex justify-content-center">Log In</span>
+                  <span class="SubTitle mt-4 d-flex justify-content-center">Sales Price</span>
+                          <div class="fieldOutline d-flex justify-content-center mt-4">
+                              <mat-form-field appearance="fill">
+                                  <mat-label>User Id</mat-label>
+                                  <input class="formField" matInput formControlName="UserId">
+                                  <mat-icon matSuffix>account_circle</mat-icon>
+                              </mat-form-field>
+                          </div>
+                          <div class="fieldOutline d-flex justify-content-center">
+                              <mat-form-field appearance="fill">
+                                  <mat-label>Password</mat-label>
+                                  <input [type]="hide ? 'password' : 'text'" class="formField" matInput formControlName="Password">
+                                  <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                              </mat-form-field>
+                          </div>
+                      <div class="d-flex justify-content-center forgot">
+                          <div class="w-75 d-flex justify-content-end">
+                              <span (click)="OpenForgotPasswordDialog('Forgot Password')">Forgot Password</span>
+                          </div>
+                      </div>
+                      <div class="d-flex justify-content-center mt-5">
+                          <button mat-flat-button (click)="Login()">Login</button>
+                      </div>
+                </form>
+               
+              </div>
+         </div>
+    </div>
+  
+</div> -->
+
+
+
+
+<div class="container-fluid login row align-items-center">
+    <div class="row">
+        <div class="col-md-8 d-flex d-none d-md-block p-0">
+           <div class="image"></div>
+         </div>
+         <div class="col-md-4 mt-5">
+            
+            <mat-card class="d-flex p-2">
+
+               <div class="d-flex col-12 justify-content-between">
+                <div class="col-md-5">
+                    <img class="w-100" src="/assets/images/Continental_Logo_Black_sRGB.png" alt="Continental-Logo" height="70px">
+                </div>  
+                <div  class="col-md-5 mt-4 mb-4">
+                    <span class="HeadingTitle">SALES PRICE</span>
+                </div>
+               </div>
+                <div class="d-flex justify-content-center ">
+                    <span class="title">Log In</span>
+                </div>
+                <div class="row gap-3 mt-3">
+                    <form [formGroup]="loginFormGroup">
+                        <div class="row gap-1">
+                            <div class="d-flex justify-content-center">
+                                <mat-form-field class="w-75" appearance="outline">
+                                    <mat-label>User Id</mat-label>
+                                    <input class="formField" matInput formControlName="UserId">
+                                </mat-form-field>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <mat-form-field class="w-75" appearance="outline">
+                                    <mat-label>Password</mat-label>
+                                    <input [type]="hide ? 'password' : 'text'" class="formField" matInput formControlName="Password">
+                                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center forgot">
+                            <div class="w-75 d-flex justify-content-end">
+                                <span (click)="OpenForgotPasswordDialog('Forgot Password')">Forgot Password</span>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="d-flex justify-content-center mb-3">
+                        <button mat-flat-button (click)="Login()">Login</button>
+                    </div>
+                </div>
+    
+            </mat-card>
+        </div>
+    </div>
+  
+</div>

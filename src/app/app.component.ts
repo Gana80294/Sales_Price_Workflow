@@ -9,7 +9,14 @@ import { SeoService } from './@core/utils/seo.service';
 
 @Component({
   selector: 'ngx-app',
-  template: '<router-outlet></router-outlet>',
+  template: `<router-outlet></router-outlet>
+  <ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="large"
+  color="white"
+  type="ball-fussion"
+  [fullScreen] = "true">
+</ngx-spinner>`,
 })
 export class AppComponent implements OnInit {
 

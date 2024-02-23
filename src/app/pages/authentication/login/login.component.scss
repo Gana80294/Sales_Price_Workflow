@@ -1,0 +1,72 @@
+.login{
+    height: 100vh;
+    background: url("/assets/images/Login_image.jpg.png");
+    background-repeat: no-repeat;
+    background-size:100% 100%;
+ 
+ .formField{
+      height: 25px !important;
+ }
+
+ mat-card{
+
+    background-color: rgba(255, 255, 255, 0.859);
+    height: 100% !important;
+
+  }
+
+ .title
+ {
+     font-size: 20px;
+     font-weight: bold;
+     line-height: 1.33;
+     letter-spacing: 0.72px;
+     font-family :Verdana, Geneva, Tahoma, sans-serif;
+     color:rgb( 0,78,175);;
+ }
+ .HeadingTitle{
+     font-size: 22px;
+     font-weight: bold;
+     font-family: Arial, Helvetica, sans-serif;
+     line-height: 1.33;
+     letter-spacing: 0.52px;
+     text-align: left;
+     color: black;
+ }
+ .forgot
+ {
+     color: black;
+     cursor: pointer;
+     font-size: 12px;
+     font-weight: 700;
+     font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+ }     
+ .forgot:hover{
+     color: rgb( 0,78,175);
+ }
+ 
+ button
+ {
+     width: 50%;
+     background-color: rgb( 0,78,175);
+     color: white;
+     font-size: 15px;
+     box-shadow: 0 2px 6px 0 rgba(31, 0, 158, 0.16);
+     border-radius: 40px;
+ }
+ 
+}
+
+
+// .row
+//  {
+//     margin-left: 0px !important;
+//     margin-right: 0px !important;
+//  }
+
+
+.userActivationDialog
+{
+    background: rgba(128, 128, 128, 0.61);
+}

@@ -1,0 +1,188 @@
+mat-label{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.text-field{
+::ng-deep .mat-mdc-text-field-wrapper {
+    height: 40px !important;
+}
+::ng-deep .mat-mdc-form-field-subscript-wrapper{
+    height: 0px;
+}
+}
+
+.borders {
+    border-top-left-radius: 15px;
+    background:rgb( 0,78,175);
+    // background-image: url("//srcassets/images/FOC_BackgroundImage.jpg");
+    // background-repeat: no-repeat;
+   // background-size: 100% 100%;
+    width: 400px;
+    position: relative;
+    height: 30px;
+    line-height: 100px;
+    text-align: center;
+    color: white;
+    font-size: 21px;
+    font-family: arial, sans-serif;
+  }
+  .borders:after {
+    position: absolute;
+    right: -50px;
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 50px solid rgb( 0,78,175);
+  }
+  .borderstraight{
+    border-bottom: 4px solid rgb( 0,78,175);
+  }
+
+  @media (max-width: 500px) {
+    .borders{
+        border-top-right-radius: 15px;
+    }
+    .borders:after{
+        border-bottom: 0px solid rgb( 0,78,175);
+    }
+   }
+
+   .table{
+     overflow-x: scroll !important;
+     overflow-y: hidden !important;
+     height: 150px !important;
+   }
+ 
+ table{
+     width : 100%;  
+ 
+     th{
+         color :white;
+         background-color: rgb( 0,78,175);
+         min-width: 200px !important;
+     }
+     td{
+         font-size: 12px;
+         min-width: max-content !important;
+         background-color: white;
+     }
+     tr{
+         height: 70px;
+     }
+ }
+
+.attachBtn{
+    background-color: rgb(244, 173, 41) !important;
+    color: white !important;
+}
+
+.DoneBtn{
+    background-color:rgb(72, 231, 72) !important;
+    color: white !important;
+}
+
+.ClearBtn{
+    background-color:#d6201d !important;
+    color: white !important;
+}
+
+
+
+
+
+
+
+
+
+// Stepper Styles
+
+.stepWizardList{
+    color:#333;
+    border-radius: 10px;
+    display: flex;
+    position: relative;
+    z-index:10;
+}
+.stepWizardItem{
+    padding:0 20px;
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    min-width: 170px;
+    position: relative;
+}
+.stepWizardItem + .stepWizardItem::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 19px;
+    background-color: rgb(0, 78, 175);
+    width: 100%;
+    height: 2px;
+    transform: translateX(-50%);
+    z-index:-10;
+}
+.progressIcon{
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: 600;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+    color: transparent;
+}
+.progressIcon::after{
+    content: "";
+    height: 40px;
+    width: 40px;
+    background-color: rgb(0, 78, 175);
+    position: absolute;
+    transform: translateX(-50%, -50%);
+    border-radius: 50%;
+    z-index: -10;
+}
+.progressIcon::before{
+    content: "";
+    height: 10px;
+    width: 20px;
+    border-left: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    left: 50%;
+    top:50%;
+    position: absolute;
+    transform: translate(-50%, -60%) rotate(-45deg);
+    transform-origin: center center;
+}
+.progressLabel{
+     font-size: 14px;
+     font-weight: 600;
+     margin-top: 10px;
+}
+.currentItem .progressIcon::before,
+.currentItem ~ .stepWizardItem .progressIcon::before{
+    display: none;
+}
+.currentItem ~ .stepWizardItem .progressIcon::after{
+    width: 10px;
+    height: 10px;
+}   
+.currentItem ~ .stepWizardItem .progressLabel{
+    opacity: 0.5;
+}
+.currentItem .progressIcon::after{
+    background: #fff;
+    border: 2px solid rgb(0, 78, 175);
+}
+.currentItem .progressIcon{
+    color: rgb(0, 78, 175);
+}
