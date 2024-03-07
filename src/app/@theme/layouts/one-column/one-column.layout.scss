@@ -7,3 +7,23 @@
     padding-top: nb-theme(layout-padding-top);
   }
 }
+
+.content-padding{
+  padding : 0px !important;
+}
+
+
+nb-layout-header{
+  //background-color: rgba(30, 30, 248, 0.579);
+  background-image: url("/assets/images/blue_Shade.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+nb-layout-column{
+  padding: 0px !important;
+}
+
+ngx-footer{
+  height:  10px;
+}

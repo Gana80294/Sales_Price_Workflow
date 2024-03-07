@@ -1,0 +1,307 @@
+<div class="container-fluid">
+
+
+    <div class="mt-3">
+        <Section>
+            <ul class="stepWizardList list-unstyled">
+                <li class="stepWizardItem" *ngFor="let data of activeStepper" [class.currentItem]="data.Status == 'Active' || data.Status == ''">
+                    <span class="progressIcon"><mat-icon>person_outline</mat-icon></span>
+                    <span class="progressLabel">{{data.Owner}}</span>
+                    <div class="approved-date">{{data.ApprovedOn | date: 'dd/MM/yyyy'}}</div>
+                </li>
+            </ul>
+        </Section>
+    </div>
+
+
+
+    <div class="row p-3">
+
+        <form [formGroup]="SalesForm">
+
+            <div class="row justify-content-md-start ps-md-3 justify-content-center gap-3 foc-form">
+
+                <div class="col-12 col-sm-8 row gap-2">
+
+                    <div class="col-4 row">
+                        <mat-label>Tracking No</mat-label>
+                        <mat-form-field class="text-field" appearance="outline">
+                            <input matInput type="text" formControlName="TrackingNo" readonly>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-4 row">
+                        <mat-label> Sales Organisation </mat-label>
+                        <mat-form-field class="text-field" appearance="outline">
+                            <mat-select formControlName="SalesOrganisation">
+                                <mat-option *ngFor="let sales of salesOrganizationList" [value]="sales.SalesOrganization">
+                                    {{sales.SalesOrganization}} - {{sales.Name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-4 row">
+                        <mat-label>Distribution Channel</mat-label>
+                        <div class="d-flex">
+                            <mat-form-field class="text-field" appearance="outline">
+                                <mat-select formControlName="DistributionChannel">
+                                    <mat-option *ngFor="let dist of distributionList" [value]="dist.DistributionChannel">
+                                        {{dist.DistributionChannel}} - {{dist.Name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <!-- <mat-icon class="mt-2" matSuffix (click)="ClickonCustomerCode()">search</mat-icon> -->
+                        </div>
+                    </div>
+
+                    <div class="col-4 row">
+                        <mat-label>Plant</mat-label>
+                        <mat-form-field class="text-field" appearance="outline">
+                            <input matInput type="text" maxlength="4" (keypress)="($event.charCode >= 48 && $event.charCode < 58)" formControlName="Plant">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-4 row">
+                        <div class="d-flex justify-content-between">
+                            <mat-label>Customer</mat-label>
+                            <div>{{SalesForm.value.CustomerCode}}</div>
+                        </div>
+                        <div class="d-flex">
+                            <mat-form-field class="text-field" appearance="outline">
+                                <input matInput type="text" formControlName="CustomerName">
+                            </mat-form-field>
+                            <mat-icon class="mt-2" matSuffix (click)="ClickonCustomerCode()">search</mat-icon>
+                        </div>
+                    </div>
+
+                    <div class="col-4 row" *ngIf="showCondition">
+                        <mat-label>Document Condition No</mat-label>
+                        <mat-form-field class="text-field" appearance="outline">
+                            <input matInput type="text" formControlName="ConditionRecNo">
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+
+                <div class="col-12 col-md-4 row gap-2">
+                    
+                    <div class="row">
+                        <mat-label>Comments</mat-label>
+                        <textarea matInput cols="20" rows="3" formControlName="Comments"></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                        
+                        <div *ngIf="showDownload">
+                            <button class="DoneBtn" mat-raised-button (click)="downloadAttachment()"> Download Attachment</button>
+                        </div>
+
+                        <button mat-raised-button class="attachBtn" type="button" (click)="uploadInput.click()" *ngIf="showAttachment">
+                            <mat-icon>upload</mat-icon>
+                            <span>Attachment</span>
+                            <input #uploadInput type="file" onclick="this.value=null" (change)="onUploadFileChange($event)" style="display:none;" />
+                        </button>
+
+                    </div>
+                    
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+
+    <div class="borders"></div>
+    <div class="borderstraight"></div>
+
+    <mat-card>
+        <mat-card-content>
+            <div class="row overflow-auto table">
+
+                <table mat-table [dataSource]="dataSource">
+
+                    <form [formGroup]="SalesPriceFormGroup">
+
+                        <div formArrayName="items">
+
+                            <ng-container matColumnDef="Conti_Material_No">
+                                <th mat-header-cell *matHeaderCellDef>Conti Material NO </th>
+                                <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index"
+                                    class="d-flex align-items-center mt-3">
+                                    <mat-form-field class="text-field" appearance="outline">
+                                        <!-- <input matInput type="text" formControlName="ContiMaterialNo" *ngIf="materialNoList.length < 1"> -->
+                                        <input matInput type="text" formControlName="ContiMaterialNo" *ngIf="materialNoList.length < 1">
+                                        <!-- <mat-select formControlName="ContiMaterialNo" *ngIf="materialNoList.length > 1">
+                                            <mat-option *ngFor="let part of materialNoList; let index = index" [value]="part">
+                                                {{part}}
+                                            </mat-option>
+                                        </mat-select> -->
+                                    </mat-form-field>
+                                    <mat-icon (click)="getMaterialfromTable(index)">search</mat-icon>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Customer_Material">
+                                <th mat-header-cell *matHeaderCellDef> Customer Material </th>
+                                <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                    <mat-form-field class="text-field" appearance="outline">
+                                        <input matInput type="text" formControlName="CustomerPartNo">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Description">
+                                <th mat-header-cell *matHeaderCellDef> Description </th>
+                                <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                    <mat-form-field class="text-field" appearance="outline">
+                                        <input matInput type="text" formControlName="MaterialDescription">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Effective_Date">
+                                <th mat-header-cell *matHeaderCellDef> Effective Date </th>
+                                <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                    <mat-form-field class="text-field" appearance="outline">
+                                        <input matInput [matDatepicker]="effectiveDate" formControlName="EffectiveDate">
+                                        <mat-icon matSuffix (click)="effectiveDate.open()">date_range</mat-icon>
+                                        <mat-datepicker #effectiveDate></mat-datepicker>
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Valid_From">
+                                <th mat-header-cell *matHeaderCellDef> Valid From </th>
+                                <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                    <mat-form-field class="text-field" appearance="outline">
+                                        <input matInput [matDatepicker]="validFrom" formControlName="ValidFrom">
+                                        <mat-icon matSuffix (click)="validFrom.open()">date_range</mat-icon>
+                                        <mat-datepicker #validFrom></mat-datepicker>
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Valid_To">
+                                <th mat-header-cell *matHeaderCellDef> Valid To </th>
+                                <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                    <mat-form-field class="text-field" appearance="outline">
+                                        <input matInput [matDatepicker]="validTo" formControlName="ValidTo">
+                                        <mat-icon matSuffix (click)="validTo.open()">date_range</mat-icon>
+                                        <mat-datepicker #validTo></mat-datepicker>
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Old_Price">
+                                <th mat-header-cell *matHeaderCellDef> Old Price </th>
+                                <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                    <mat-form-field class="text-field" appearance="outline">
+                                        <input matInput type="text" formControlName="OldPrice">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Old_Price_Currency">
+                                <th mat-header-cell *matHeaderCellDef> Old Price Currency </th>
+                                <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                    <mat-form-field class="text-field" appearance="outline">
+                                        <input matInput type="text" formControlName="OldPriceCurrency">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="New_Price">
+                                <th mat-header-cell *matHeaderCellDef> New Price </th>
+                                <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                    <mat-form-field class="text-field" appearance="outline">
+                                        <input matInput type="text" formControlName="NewPrice">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="New_Price_Currency">
+                                <th mat-header-cell *matHeaderCellDef> New Price Currency </th>
+                                <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                    <mat-form-field class="text-field" appearance="outline">
+                                        <input matInput type="text" formControlName="NewPriceCurrency">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Unit">
+                                <th mat-header-cell *matHeaderCellDef> Unit </th>
+                                <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                    <mat-form-field class="text-field" appearance="outline">
+                                        <input matInput type="text" formControlName="Unit">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Outlet">
+                                <th mat-header-cell *matHeaderCellDef> Outlet </th>
+                                <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                    <mat-form-field class="text-field" appearance="outline">
+                                        <input matInput type="text" formControlName="Outlet">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+                            <!-- <ng-container matColumnDef="Changed_by">
+                                <th mat-header-cell *matHeaderCellDef> Changed by </th>
+                                <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                    <mat-form-field class="text-field" appearance="outline">
+                                        <input matInput type="text" formControlName="ChangedBy">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Changed_On">
+                                <th mat-header-cell *matHeaderCellDef> Changed_On </th>
+                                <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                    <mat-form-field class="text-field" appearance="outline">
+                                        <input matInput [matDatepicker]="changedOn" formControlName="ChangedOn">
+                                        <mat-icon matSuffix (click)="changedOn.open()">date_range</mat-icon>
+                                        <mat-datepicker #changedOn></mat-datepicker>
+                                    </mat-form-field>
+                                </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="Time">
+                                <th mat-header-cell *matHeaderCellDef> Time </th>
+                                <td mat-cell *matCellDef="let element;let index = index" [formGroupName]="index">
+                                    <mat-form-field class="text-field" appearance="outline">
+                                        <input matInput type="time" formControlName="Time">
+                                    </mat-form-field>
+                                </td>
+                            </ng-container> -->
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky : true"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </div>
+                    </form>
+
+                </table>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <div class="d-flex justify-content-end gap-2 mt-1" *ngIf="showExecute">
+        <button class="ClearBtn" mat-raised-button (click)="cancel()"><mat-icon>clear</mat-icon>Cancel</button>
+        <button class="DoneBtn" mat-raised-button (click)="submit()">Submit</button>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-1" *ngIf="showApprove">
+        <button class="ClearBtn" mat-raised-button (click)="reject()"><mat-icon>clear</mat-icon>Reject</button>
+        <button class="DoneBtn" mat-raised-button (click)="approve()"><mat-icon>done</mat-icon>Approve</button>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-1" *ngIf="showConditionBtn">
+        <button class="ClearBtn" mat-raised-button (click)="cancel()"><mat-icon>clear</mat-icon>Cancel</button>
+        <button class="DoneBtn" mat-raised-button (click)="update()"><mat-icon>done</mat-icon>Update</button>
+    </div>
+
+</div>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="white" type="ball-fussion" [fullScreen]="true">
+</ngx-spinner>

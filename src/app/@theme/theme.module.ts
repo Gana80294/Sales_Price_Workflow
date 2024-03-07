@@ -15,6 +15,7 @@ import {
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSecurityModule } from '@nebular/security';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import {
   FooterComponent,
@@ -38,6 +39,15 @@ import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
+import { MatIconModule } from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatMenuModule} from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterModule, Routes } from '@angular/router';
+
+
+const routes : Routes = [];
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -52,6 +62,11 @@ const NB_MODULES = [
   NbSelectModule,
   NbIconModule,
   NbEvaIconsModule,
+  MatIconModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatMenuModule,
+  MatButtonModule,
 ];
 const COMPONENTS = [
   HeaderComponent,
@@ -71,7 +86,7 @@ const PIPES = [
 ];
 
 @NgModule({
-  imports: [CommonModule, ...NB_MODULES],
+  imports: [CommonModule, ...NB_MODULES,RouterModule.forChild(routes), MatDialogModule],
   exports: [CommonModule, ...PIPES, ...COMPONENTS],
   declarations: [...COMPONENTS, ...PIPES],
 })

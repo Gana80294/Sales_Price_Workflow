@@ -67,4 +67,90 @@
       display: none;
     }
   }
+
+  nav{
+    width: 100vw;
+    box-shadow: none !important;
+  }
+
+  .nav-content{
+    background-color: rgba(30, 30, 248, 0.579);
+    color: black;
+    border-radius : 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .menu-link{
+    color: white;
+  }
+
+  .nav-content :hover{
+    color: black !important;
+  }
+
+  .nav-title{
+
+    font-weight: bold;
+    font-size: 21px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+  }
+
+  .nav-item :hover
+{
+  color: black;
+  border-radius : 10px;
+  cursor: pointer;
 }
+.nav-link
+{
+  font-weight: bold;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+}
+
+.menu-item
+{
+  cursor: pointer;
+}
+
+
+.user-logo
+{
+  border-radius: 50%;
+  border: 2px solid white;
+  font-weight: bold;
+  width: 40px;
+  height:40px;
+  color:white;
+}
+
+.user-title
+{
+  font-weight: bold;
+  color:white;
+}
+
+.mat-menu{
+  background-color: white;
+}
+
+.mat-menu :hover{
+  background-color: rgba(217, 213, 213, 0.928);
+  color:white !important;
+}
+.text{
+  font-weight: 600;
+  font-size: 15px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.text :hover{
+  color: white;
+}
+
+

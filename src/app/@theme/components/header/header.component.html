@@ -1,4 +1,4 @@
-<div class="header-container">
+<!-- <div class="header-container">
   <div class="logo-container">
     <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
       <nb-icon icon="menu-2-outline"></nb-icon>
@@ -26,4 +26,91 @@
       </nb-user>
     </nb-action>
   </nb-actions>
-</div>
+</div> -->
+
+
+<nav id="mainNavbar" class="navbar navbar-expand-lg-none fixed-top">
+
+  <div class="row ps-2 w-100">
+
+    <div class=" col-2  d-inherit d-md-none justify-content-center align-items-center">
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation"
+        (click)="toggleCollapsed()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div class="col-10 col-md-5 d-flex gap-3">
+      <div><img src="/assets/images/Continental_Logo_White_sRGB.png" alt="ContiLogo" width="160px" height="65x"></div>
+      <div class="nav-title d-flex align-items-center"><span class="me-2 mb-1">|</span> Sales Price</div>
+    </div>
+    
+    <div class="col-5 d-none d-md-block">
+      <div class="nav-item d-flex mt-4 gap-3">
+        <div class="nav-link" routerLink="/pages/price-pages/dashboard" routerLinkActive="active"> Dashboard</div>
+        <div class="nav-link ms-5" routerLink="/pages/price-pages/price-entry" routerLinkActive="active" *ngIf="role == 'I'"> Create Price Entry</div>
+      </div>
+    </div>
+
+    <!-- <div class="col-2 d-md-block d-none">
+
+      <div [matMenuTriggerFor]="menu" class="menu-item d-flex align-items-center gap-2 mt-2">
+        
+        <div class="user-logo d-flex justify-content-center align-items-center"> {{userFirstLetter}} </div>
+        <div class="user-title d-flex align-items-center">Nick Jones</div>
+
+        <mat-menu #menu="matMenu" class="d-flex justify-content-center">
+          <div class="mat-menu">
+            <button mat-menu-item>
+              <mat-icon>account_circle</mat-icon>
+              <div class="text">Profile</div>
+            </button>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>power_settings_new</mat-icon>
+              <div class="text">Log Out</div>
+            </button>
+          </div>
+        </mat-menu>
+
+      </div>
+    
+    </div> -->
+
+    <div class="col-2 d-md-block d-none">
+
+      <div [matMenuTriggerFor]="menu" class="menu-item d-flex align-items-center gap-2 mt-2">
+        
+        <div class="user-logo d-flex ms-5 justify-content-center align-items-center"> {{userFirstLetter}} </div>
+        <div class="user-title d-flex align-items-center">{{user}}</div>
+
+        <mat-menu #menu="matMenu" class="d-flex justify-content-center">
+          <div class="mat-menu">
+            <button mat-menu-item (click)="changePassword()">
+              <mat-icon>account_circle</mat-icon>
+              <div class="text">Change Password</div>
+            </button>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>power_settings_new</mat-icon>
+              <div class="text">Log Out</div>
+            </button>
+          </div>
+        </mat-menu>
+
+      </div>
+    
+    </div>
+
+  </div>
+
+    <div id="navbarSupportedContent"  [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
+      <div class="row d-inherit d-md-none nav-content justify-content-center gap-4 p-3">
+        <div class="menu-link d-flex justify-content-center" routerLink="/pages/price-pages/dashboard" routerLinkActive="active"> Dashboard</div>
+        <div class="menu-link d-flex justify-content-center" routerLink="/pages/price-pages/price-entry" routerLinkActive="active"> Create Price Entry </div>
+        <div class="menu-link d-flex justify-content-center">Change Password</div>
+        <div class="menu-link d-flex justify-content-center">Log Out</div>
+      </div>
+    </div>
+
+</nav>
